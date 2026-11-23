@@ -54,7 +54,7 @@ describe("shopping cart app", () => {
     await screen.findByRole("heading", { name: "Test Backpack" });
 
     const cartLink = screen.getByRole("link", { name: /cart/i });
-    expect(cartLink).not.toHaveTextContent("(");
+    expect(screen.queryByLabelText(/items in cart/i)).not.toBeInTheDocument();
 
     const [firstAddButton] = screen.getAllByRole("button", {
       name: /add to cart/i,
@@ -64,7 +64,7 @@ describe("shopping cart app", () => {
     );
     await user.click(firstAddButton);
 
-    expect(cartLink).toHaveTextContent("(2)");
+    expect(screen.getByLabelText("2 items in cart")).toBeInTheDocument();
   });
 
   it("lets the user edit and remove items on the cart page", async () => {
