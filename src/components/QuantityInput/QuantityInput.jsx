@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
+import styles from "./QuantityInput.module.css";
 
 function QuantityInput({ value, onChange, onIncrement, onDecrement, label }) {
   return (
-    <div>
+    <div className={styles.group}>
       <button
         type="button"
+        className={styles.button}
         onClick={onDecrement}
         aria-label={`Decrease quantity of ${label}`}
       >
@@ -14,6 +16,7 @@ function QuantityInput({ value, onChange, onIncrement, onDecrement, label }) {
       <input
         type="number"
         min="1"
+        className={styles.input}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label={`Quantity of ${label}`}
@@ -21,6 +24,7 @@ function QuantityInput({ value, onChange, onIncrement, onDecrement, label }) {
 
       <button
         type="button"
+        className={styles.button}
         onClick={onIncrement}
         aria-label={`Increase quantity of ${label}`}
       >

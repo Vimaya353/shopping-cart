@@ -1,11 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import QuantityInput from "../QuantityInput/QuantityInput";
+import styles from "./ProductCard.module.css";
 
 function ProductCard({ product, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
 
-  
   const getValidQuantity = () => {
     const parsed = parseInt(quantity, 10);
     return Number.isNaN(parsed) || parsed < 1 ? 1 : parsed;
@@ -18,26 +18,29 @@ function ProductCard({ product, onAddToCart }) {
 
   const handleAdd = () => {
     onAddToCart(product, getValidQuantity());
-    setQuantity(1); 
+    setQuantity(1);
   };
 
   return (
-    <article>
-      <img src={product.image} alt={product.title} width="120" />
-      <h2>{product.title}</h2>
-      <p>${product.price.toFixed(2)}</p>
+    <article className={styles.card}>
+      <div className={styles.imageWrap}>
+        <img className={styles.image} src={product.image} alt={product.title} />
+      </div>
+      <h2 className={styles.title}>{product.title}</h2>
+      <p className={styles.price}>${product.price.toFixed(2)}</p>
 
-      <QuantityInput
-        value={quantity}
-        onChange={setQuantity}
-        onIncrement={handleIncrement}
-        onDecrement={handleDecrement}
-        label={product.title}
-      />
-
-      <button type="button" onClick={handleAdd}>
-        Add To Cart
-      </button>
+      <div className={styles.actions}>
+        <QuantityInput
+          value={quantity}
+          onChange={setQuantity}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+          label={product.title}
+        />
+        <button type="button" className={styles.addButton} onClick={handleAdd}>
+          Add To Cart
+        </button>
+      </div>
     </article>
   );
 }
