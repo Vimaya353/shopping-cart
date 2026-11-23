@@ -1,13 +1,11 @@
 import useProducts from "../../hooks/useProducts";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { useCart } from "../../context/CartContext";
 
 function Shop() {
   const { products, loading, error } = useProducts();
-
-  const handleAddToCart = (product, quantity) => {
-   
-    console.log("Add to cart:", product.title, quantity);
-  };
+  const { addToCart } = useCart();
+  
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Something went wrong: {error}</p>;
@@ -20,7 +18,7 @@ function Shop() {
           <ProductCard
             key={product.id}
             product={product}
-            onAddToCart={handleAddToCart}
+            onAddToCart={addToCart}
           />
         ))}
       </div>
