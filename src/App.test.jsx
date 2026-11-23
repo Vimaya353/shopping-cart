@@ -79,17 +79,16 @@ describe("shopping cart app", () => {
 
     // Go to the cart page
     await user.click(screen.getByRole("link", { name: /cart/i }));
-    expect(screen.getByText(/total: \$20\.00/i)).toBeInTheDocument();
+    expect(screen.getByText(/^total: \$20\.00$/i)).toBeInTheDocument();
 
     // Increase to 3
     await user.click(
       screen.getByRole("button", { name: /increase quantity of test backpack/i })
     );
-    expect(screen.getByText(/total: \$30\.00/i)).toBeInTheDocument();
+    expect(screen.getByText(/^total: \$30\.00$/i)).toBeInTheDocument();
 
     // Remove it
     await user.click(screen.getByRole("button", { name: /remove/i }));
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
   });
 });
-
