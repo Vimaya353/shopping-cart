@@ -22,7 +22,7 @@ function useProducts() {
                 setProducts(data);
             } catch(err) {
                 if (err.name !== "AbortError") {
-                  setError(error.message);
+                  setError(err.message);
                 }
             } finally {
               if (!controller.signal.aborted) {
