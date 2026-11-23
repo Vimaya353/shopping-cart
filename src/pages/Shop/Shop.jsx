@@ -1,17 +1,31 @@
 import useProducts from "../../hooks/useProducts";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 function Shop() {
-    const {products,loading,error} = useProducts();
+  const { products, loading, error } = useProducts();
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Something went wrong: {error}</p>;
+  const handleAddToCart = (product, quantity) => {
+   
+    console.log("Add to cart:", product.title, quantity);
+  };
 
-    return (
-        <div>
-            <h1>Shop</h1>
-            <p>Loaded {products.length} products</p>
-        </div>
-    );
+  if (loading) return <p>Loading products...</p>;
+  if (error) return <p>Something went wrong: {error}</p>;
+
+  return (
+    <section>
+      <h1>Shop</h1>
+      <div>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={handleAddToCart}
+          />
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export default Shop;
